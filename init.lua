@@ -231,6 +231,23 @@ require('lazy').setup({
     branch = 'harpoon2',
     dependencies = { 'nvim-lua/plenary.nvim' },
   },
+  {
+    'christoomey/vim-tmux-navigator',
+    cmd = {
+      'TmuxNavigateLeft',
+      'TmuxNavigateDown',
+      'TmuxNavigateUp',
+      'TmuxNavigateRight',
+      'TmuxNavigatePrevious',
+    },
+    keys = {
+      { '<c-h>', '<cmd><C-U>TmuxNavigateLeft<cr>' },
+      { '<c-j>', '<cmd><C-U>TmuxNavigateDown<cr>' },
+      { '<c-k>', '<cmd><C-U>TmuxNavigateUp<cr>' },
+      { '<c-l>', '<cmd><C-U>TmuxNavigateRight<cr>' },
+      { '<c-\\>', '<cmd><C-U>TmuxNavigatePrevious<cr>' },
+    },
+  },
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   -- NOTE: Plugins can also be added by using a table,
@@ -293,6 +310,10 @@ require('lazy').setup({
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
         ['<leader>a'] = { name = '[A]ppend', _ = 'which_key_ignore' },
         ['<leader>x'] = { name = '[X]Pop', _ = 'which_key_ignore' },
+        ['<leader>j'] = { name = '[1]Harpoon', _ = 'which_key_ignore' },
+        ['<leader>k'] = { name = '[2]Harpoon', _ = 'which_key_ignore' },
+        ['<leader>l'] = { name = '[3]Harpoon', _ = 'which_key_ignore' },
+        ['<leader>;'] = { name = '[4]Harpoon', _ = 'which_key_ignore' },
       }
     end,
   },
@@ -862,16 +883,16 @@ vim.keymap.set('n', '<C-e>', function()
   harpoon.ui:toggle_quick_menu(harpoon:list())
 end)
 
-vim.keymap.set('n', '<C-j>', function()
+vim.keymap.set('n', '<leader>j', function()
   harpoon:list():select(1)
 end)
-vim.keymap.set('n', '<C-k>', function()
+vim.keymap.set('n', '<leader>k', function()
   harpoon:list():select(2)
 end)
-vim.keymap.set('n', '<C-l>', function()
+vim.keymap.set('n', '<leader>l', function()
   harpoon:list():select(3)
 end)
-vim.keymap.set('n', '<C-;>', function()
+vim.keymap.set('n', '<leader>;', function()
   harpoon:list():select(4)
 end)
 
