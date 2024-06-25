@@ -931,3 +931,5 @@ end, { range = true })
 
 require 'run_python_file'
 vim.api.nvim_set_keymap('n', '<leader>p', ':RunPython<CR>', { noremap = true, silent = true })
+
+vim.keymap.set('n', '<leader>gb', ':Gitsigns toggle_current_line_blame<CR>', { desc = 'Git blame current line' })
