@@ -638,7 +638,7 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
+        python = { 'isort', 'ruff' },
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
@@ -931,11 +931,5 @@ end, { range = true })
 
 require 'run_python_file'
 vim.api.nvim_set_keymap('n', '<leader>p', ':RunPython<CR>', { noremap = true, silent = true })
-
--- black python formatting
-vim.keymap.set('n', '<leader>fb', ':silent !black %<cr>')
-
--- ruff python formatting
-vim.keymap.set('n', '<leader>fr', ':silent !ruff format %<cr>')
 
 vim.keymap.set('n', '<leader>gb', ':Gitsigns toggle_current_line_blame<CR>', { desc = 'Git blame current line' })
