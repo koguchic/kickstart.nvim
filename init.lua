@@ -313,7 +313,6 @@ require('lazy').setup({
         ['<leader>j'] = { name = '[1]Harpoon', _ = 'which_key_ignore' },
         ['<leader>k'] = { name = '[2]Harpoon', _ = 'which_key_ignore' },
         ['<leader>l'] = { name = '[3]Harpoon', _ = 'which_key_ignore' },
-        ['<leader>;'] = { name = '[4]Harpoon', _ = 'which_key_ignore' },
       }
     end,
   },
@@ -892,9 +891,6 @@ end)
 vim.keymap.set('n', '<leader>l', function()
   harpoon:list():select(3)
 end)
-vim.keymap.set('n', '<leader>;', function()
-  harpoon:list():select(4)
-end)
 
 -- Toggle previous & next buffers stored within Harpoon list
 vim.keymap.set('n', '<C-S-P>', function()
@@ -927,3 +923,10 @@ end
 vim.keymap.set('n', '<C-e>', function()
   toggle_telescope(harpoon:list())
 end, { desc = 'Open harpoon window' })
+
+vim.api.nvim_create_user_command('RunPython', function()
+  require('run_python_file').run_python_file()
+end, { range = true })
+
+require 'run_python_file'
+vim.api.nvim_set_keymap('n', '<leader>p', ':RunPython<CR>', { noremap = true, silent = true })
