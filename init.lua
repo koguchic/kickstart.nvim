@@ -313,6 +313,7 @@ require('lazy').setup({
         ['<leader>j'] = { name = '[1]Harpoon', _ = 'which_key_ignore' },
         ['<leader>k'] = { name = '[2]Harpoon', _ = 'which_key_ignore' },
         ['<leader>l'] = { name = '[3]Harpoon', _ = 'which_key_ignore' },
+        ['<leader>p'] = { name = '[P]ython Run', _ = 'which_key_ignore' },
       }
     end,
   },
@@ -568,7 +569,7 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- pyright = {},
+        pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
