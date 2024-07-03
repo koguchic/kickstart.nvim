@@ -312,8 +312,9 @@ require('lazy').setup({
         ['<leader>x'] = { name = '[X]Pop', _ = 'which_key_ignore' },
         ['<leader>j'] = { name = '[1]Harpoon', _ = 'which_key_ignore' },
         ['<leader>k'] = { name = '[2]Harpoon', _ = 'which_key_ignore' },
-        ['<leader>l'] = { name = '[3]Harpoon', _ = 'which_key_ignore' },
         ['<leader>p'] = { name = '[P]ython Run', _ = 'which_key_ignore' },
+        ['<leader>h'] = { name = '[h]Left', _ = 'which_key_ignore' },
+        ['<leader>l'] = { name = '[l]Right', _ = 'which_key_ignore' },
       }
     end,
   },
@@ -889,9 +890,6 @@ end)
 vim.keymap.set('n', '<leader>k', function()
   harpoon:list():select(2)
 end)
-vim.keymap.set('n', '<leader>l', function()
-  harpoon:list():select(3)
-end)
 
 -- Toggle previous & next buffers stored within Harpoon list
 vim.keymap.set('n', '<C-S-P>', function()
@@ -933,3 +931,6 @@ require 'run_python_file'
 vim.api.nvim_set_keymap('n', '<leader>p', ':RunPython<CR>', { noremap = true, silent = true })
 
 vim.keymap.set('n', '<leader>gb', ':Gitsigns toggle_current_line_blame<CR>', { desc = 'Git blame current line' })
+
+vim.keymap.set('n', '<leader>h', '^', { desc = 'Move to the front of the line' })
+vim.keymap.set('n', '<leader>l', '$', { desc = 'Move to the end of the line' })
