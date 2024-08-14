@@ -935,5 +935,5 @@ vim.keymap.set('n', '<leader>gb', ':Gitsigns toggle_current_line_blame<CR>', { d
 vim.keymap.set('n', '<leader>h', '^', { desc = 'Move to the front of the line' })
 vim.keymap.set('n', '<leader>l', '$', { desc = 'Move to the end of the line' })
 
-vim.keymap.set('n', '<C-u>', '<C-k>', { desc = 'Move up fast' })
-vim.keymap.set('n', '<C-d>', '<C-j>', { desc = 'Move down fast' })
+vim.keymap.set('n', '<C-k>', '<C-u>', { desc = 'Move up fast' })
+vim.keymap.set('n', '<C-j>', '<C-d>', { desc = 'Move down fast' })
