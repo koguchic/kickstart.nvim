@@ -937,3 +937,5 @@ vim.keymap.set('n', '<leader>l', '$', { desc = 'Move to the end of the line' })
 
 vim.keymap.set('n', '<C-k>', '<C-u>', { desc = 'Move up fast' })
 vim.keymap.set('n', '<C-j>', '<C-d>', { desc = 'Move down fast' })
+vim.keymap.set('n', '<C-h>', '^', { desc = 'Move left fast' })
+vim.keymap.set('n', '<C-l>', '$', { desc = 'Move right fast' })
