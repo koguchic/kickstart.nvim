@@ -84,6 +84,12 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
+-- Use 4 spaces for a tab
+vim.opt.tabstop = 4 -- Number of spaces a tab counts for
+vim.opt.shiftwidth = 4 -- Number of spaces to use for autoindent
+vim.opt.expandtab = true -- Convert tabs to spaces
+vim.opt.smarttab = true -- Make tab/backspace smarter
+
 -- Remove swap files
 vim.opt.swapfile = false
 
@@ -405,6 +411,18 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      require('telescope').setup {
+        defaults = {
+          mappings = {
+            i = {
+              ['<C-d>'] = require('telescope.actions').delete_buffer,
+            },
+            n = {
+              ['<C-d>'] = require('telescope.actions').delete_buffer,
+            },
+          },
+        },
+      }
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
