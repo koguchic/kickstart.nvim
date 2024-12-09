@@ -919,6 +919,14 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   end,
 })
 
+-- STFU Linter
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'cpp',
+  callback = function()
+    vim.diagnostic.disable(0) -- Disables diagnostics for the current buffer
+  end,
+})
+
 ---------------
 
 vim.keymap.set('n', '<leader>gb', ':Gitsigns toggle_current_line_blame<CR>', { desc = 'Git blame current line' })
