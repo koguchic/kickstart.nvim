@@ -221,22 +221,43 @@ require('lazy').setup({
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     config = function() -- This is the function that runs, AFTER loading
-      require('which-key').setup()
+      local wk = require 'which-key'
 
-      -- Document existing key chains
-      require('which-key').register {
-        ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-        ['<leader>a'] = { name = '[A]ppend', _ = 'which_key_ignore' },
-        ['<leader>x'] = { name = '[X]Pop', _ = 'which_key_ignore' },
-        ['<leader>j'] = { name = '[1]Harpoon', _ = 'which_key_ignore' },
-        ['<leader>k'] = { name = '[2]Harpoon', _ = 'which_key_ignore' },
-        ['<leader>p'] = { name = '[P]ython Run', _ = 'which_key_ignore' },
-        ['<leader>h'] = { name = '[h]Left', _ = 'which_key_ignore' },
-        ['<leader>l'] = { name = '[l]Right', _ = 'which_key_ignore' },
+      wk.add {
+        -- Top-level groups
+        { '<leader>a', group = '[A]ppend' },
+        { '<leader>c', group = '[C]ode' },
+        { '<leader>d', group = '[D]ocument' },
+        { '<leader>h', group = '[h]Left' },
+        { '<leader>j', group = '[1]Harpoon' },
+        { '<leader>k', group = '[2]Harpoon' },
+        { '<leader>l', group = '[l]Right' },
+        { '<leader>p', group = '[P]ython Run' },
+        { '<leader>r', group = '[R]ename' },
+        { '<leader>s', group = '[S]earch' },
+        { '<leader>w', group = '[W]orkspace' },
+        { '<leader>x', group = '[X]Pop' },
+
+        -- Hidden keymaps
+        { '<leader>a_', hidden = true },
+        { '<leader>c_', hidden = true },
+        { '<leader>d_', hidden = true },
+        { '<leader>h_', hidden = true },
+        { '<leader>j_', hidden = true },
+        { '<leader>k_', hidden = true },
+        { '<leader>l_', hidden = true },
+        { '<leader>p_', hidden = true },
+        { '<leader>r_', hidden = true },
+        { '<leader>s_', hidden = true },
+        { '<leader>w_', hidden = true },
+        { '<leader>x_', hidden = true },
+
+        -- Nested mappings for specific modes
+        {
+          mode = { 'n', 'v' },
+          { '<leader>q', '<cmd>q<cr>', desc = 'Quit' },
+          { '<leader>w', '<cmd>w<cr>', desc = 'Write' },
+        },
       }
     end,
   },
