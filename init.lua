@@ -16,6 +16,12 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = false
 
+-- Optional: tighten the timeout for multi-key mappings
+vim.opt.timeoutlen = 200
+
+-- Map jkl; to quit
+vim.keymap.set('n', 'jkl;', ':quit<CR>', { noremap = true, silent = true })
+
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
