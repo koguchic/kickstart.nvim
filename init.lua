@@ -453,16 +453,16 @@ require('lazy').setup({
       }
     end,
   },
-
+  { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
   -- Colorscheme
-  {
-    'folke/tokyonight.nvim',
-    priority = 1000,
-    init = function()
-      vim.cmd.colorscheme 'tokyonight-night'
-      vim.cmd.hi 'Comment gui=none'
-    end,
-  },
+  -- {
+  --   'folke/tokyonight.nvim',
+  --   priority = 1000,
+  --   init = function()
+  --     vim.cmd.colorscheme 'tokyonight-night'
+  --     vim.cmd.hi 'Comment gui=none'
+  --   end,
+  -- },
   {
     'folke/todo-comments.nvim',
     event = 'VimEnter',
@@ -717,3 +717,5 @@ vim.api.nvim_set_keymap('n', '<leader>h', ':cprev<CR>', { noremap = true, silent
 
 -- Telescope Quickfix Picker
 vim.api.nvim_set_keymap('n', '<leader>fl', ':Telescope quickfix<CR>', { noremap = true, silent = true })
+
+vim.cmd.colorscheme 'catppuccin-frappe'
