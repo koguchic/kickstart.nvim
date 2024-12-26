@@ -14,6 +14,10 @@ vim.g.maplocalleader = ' '
 -- For multi-key mappings
 vim.opt.timeoutlen = 200
 
+-- ripgrep
+vim.opt.grepprg = 'rg --vimgrep --no-heading'
+vim.opt.grepformat = '%f:%l:%c:%m'
+
 -- Quits on pressing "jkl;"
 vim.keymap.set('n', 'jkl;', ':quit<CR>', { noremap = true, silent = true })
 
@@ -204,11 +208,6 @@ require('lazy').setup({
         { '<leader>s', group = '[S]earch' },
         { '<leader>w', group = '[W]orkspace' },
         { '<leader>x', group = '[X]Pop' },
-        {
-          mode = { 'n', 'v' },
-          { '<leader>q', '<cmd>q<cr>', desc = 'Quit' },
-          { '<leader>w', '<cmd>w<cr>', desc = 'Write' },
-        },
       }
     end,
   },
@@ -688,6 +687,18 @@ vim.keymap.set('n', '<C-l>', '$')
 vim.keymap.set('n', '<leader>o', function()
   require('oil').open_float()
 end, { desc = 'Open floating Oil explorer' })
+
+-- Quickfix Navigation
+vim.api.nvim_set_keymap('n', '<leader>qo', ':copen<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>qc', ':cclose<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>qn', ':cnext<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>qp', ':cprev<CR>', { noremap = true, silent = true })
+
+-- Telescope Quickfix Picker
+vim.api.nvim_set_keymap('n', '<leader>ft', ':Telescope quickfix<CR>', { noremap = true, silent = true })
+
+-- FZF Quickfix Picker
+vim.api.nvim_set_keymap('n', '<leader>fq', ':FZFQuickFix<CR>', { noremap = true, silent = true })
 
 -- Modeline for consistency with tab=4
 -- vim: ts=4 sts=4 sw=4 et
