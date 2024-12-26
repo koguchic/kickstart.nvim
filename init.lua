@@ -745,8 +745,6 @@ vim.fn.mkdir(vim.fn.stdpath 'cache' .. '/undo', 'p')
 -- Optionally, enable focusing the Undo Tree window when toggled
 vim.g.undotree_SetFocusWhenToggle = 1
 
--- Optionally, use short indicators to save space
-vim.g.undotree_ShortIndicators = 1
 vim.cmd [[
   highlight UndotreeCurrentLine guibg=#3c3836 guifg=#fb4934
   highlight UndotreeDiffAdd guifg=#b8bb26
