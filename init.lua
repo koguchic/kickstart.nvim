@@ -80,6 +80,16 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugins
 require('lazy').setup({
   {
+    'mbbill/undotree',
+    cmd = { 'UndotreeToggle', 'UndotreeFocus' }, -- Lazy-load on command
+    config = function()
+      -- Optional: Configure undotree settings here
+      vim.g.undotree_SetFocusWhenToggle = 1 -- Automatically focus the undotree window when toggled
+      vim.g.undotree_ShortIndicators = 1 -- Use shorter indicators for branches
+      vim.g.undotree_WindowLayout = 3 -- Layout: right vs left vs bottom
+    end,
+  },
+  {
     'sphamba/smear-cursor.nvim',
     opts = {
       -- Smear cursor when switching buffers or windows.
@@ -229,6 +239,7 @@ require('lazy').setup({
         { '<leader>p', group = '[P]ython Run' },
         { '<leader>r', group = '[R]ename' },
         { '<leader>s', group = '[S]earch' },
+        { '<leader>u', group = '[U]ndoTree' },
         { '<leader>w', group = '[W]orkspace' },
         { '<leader>x', group = 'Pop' },
         { '<leader>/', group = 'Fuzzy Find' },
@@ -719,3 +730,13 @@ vim.api.nvim_set_keymap('n', '<leader>h', ':cprev<CR>', { noremap = true, silent
 vim.api.nvim_set_keymap('n', '<leader>fl', ':Telescope quickfix<CR>', { noremap = true, silent = true })
 
 vim.cmd.colorscheme 'catppuccin-frappe'
+
+-- Keybindings for undotree.nvim
+vim.api.nvim_set_keymap('n', '<leader>u', ':UndotreeToggle<CR>', { noremap = true, silent = true })
+
+vim.cmd [[
+  highlight UndotreeCurrentLine guibg=#3c3836 guifg=#fb4934
+  highlight UndotreeDiffAdd guifg=#b8bb26
+  highlight UndotreeDiffChange guifg=#fabd2f
+  highlight UndotreeDiffDelete guifg=#cc241d
+]]
