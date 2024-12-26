@@ -663,7 +663,6 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'cpp',
   callback = function()
-    vim.diagnostic.disable(0)
     vim.diagnostic.enable(false)
   end,
 })
