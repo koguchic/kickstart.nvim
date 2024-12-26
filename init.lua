@@ -80,8 +80,13 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Plugins
 require('lazy').setup({
-
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    main = 'ibl',
     ---@module "ibl"
+    ---@type ibl.config
+    opts = {},
+  },
   -- HARPOON
   {
     'ThePrimeagen/harpoon',
