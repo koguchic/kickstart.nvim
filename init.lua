@@ -906,8 +906,11 @@ vim.api.nvim_set_keymap('n', '<leader>cp', ':RunCpp<CR>', { noremap = true, sile
 
 -- Make clangd use ~/.clang-format where koguchi specified 4 spaces instead of 2
 require('lspconfig').clangd.setup {
-  cmd = { 'clangd', '--fallback-style=none' },
   cmd = {
+    'clangd',
+    '--query-driver=/opt/homebrew/Cellar/gcc/14.2.0_1/bin/*',
+    '--fallback-style=none',
+  },
   on_attach = function(client, bufnr)
     -- Keep formatting enabled
     client.server_capabilities.documentFormattingProvider = true
