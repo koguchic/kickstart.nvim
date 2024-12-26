@@ -80,12 +80,70 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Plugins
 require('lazy').setup({
-  -- MINIMAL MAPPINGS / UTILS
+
+  -- HARPOON
   {
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',
     dependencies = { 'nvim-lua/plenary.nvim' },
+
+    config = function()
+      local harpoon = require 'harpoon'
+
+      -- Normal Harpoon setup, keymaps, etc.
+      harpoon:setup()
+      -- Create a custom "toggle_telescope" function
+      local conf = require('telescope.config').values
+      local function toggle_telescope(harpoon_files)
+        local file_paths = {}
+        for _, item in ipairs(harpoon_files.items) do
+          table.insert(file_paths, item.value)
+        end
+        require('telescope.pickers')
+          .new({}, {
+            prompt_title = 'Harpoon',
+            finder = require('telescope.finders').new_table {
+              results = file_paths,
+            },
+            previewer = conf.file_previewer {},
+            sorter = conf.generic_sorter {},
+          })
+          :find()
+      end
+      -- Keymaps for adding/removing files with dot-notation
+      vim.keymap.set('n', '<leader>a', function()
+        harpoon:list():add()
+      end, { desc = 'Harpoon add file' })
+
+      vim.keymap.set('n', '<leader>x', function()
+        harpoon:list():remove()
+      end, { desc = 'Harpoon remove file' })
+
+      -- Use <C-e> to open harpoon:list in Telescope
+      vim.keymap.set('n', '<C-e>', function()
+        toggle_telescope(harpoon:list())
+      end, { desc = 'Open Harpoon via Telescope' })
+
+      -- Example for selecting the first or second pinned file
+      vim.keymap.set('n', '<leader>j', function()
+        harpoon:list():select(1)
+      end, { desc = 'Harpoon select file #1' })
+
+      vim.keymap.set('n', '<leader>k', function()
+        harpoon:list():select(2)
+      end, { desc = 'Harpoon select file #2' })
+
+      -- Example for jumping to prev/next pinned file
+      vim.keymap.set('n', '<C-S-P>', function()
+        harpoon:list():prev()
+      end, { desc = 'Harpoon previous' })
+
+      vim.keymap.set('n', '<C-S-N>', function()
+        harpoon:list():next()
+      end, { desc = 'Harpoon next' })
+    end,
   },
+
   {
     'christoomey/vim-tmux-navigator',
     cmd = { 'TmuxNavigateLeft', 'TmuxNavigateDown', 'TmuxNavigateUp', 'TmuxNavigateRight', 'TmuxNavigatePrevious' },
@@ -405,27 +463,17 @@ require('lazy').setup({
     'echasnovski/mini.icons',
     version = '*',
     opts = {
-      -- You can configure your desired icon set here if you like.
-      -- By default, mini.icons includes sets like "codicon", "devicons", etc.
-      -- Example:
-      -- use = {
-      --   default = 'devicons', -- or 'codicon', 'unicode', etc.
-      -- }
+      -- If you want to select a specific icon set, configure it here.
+      -- e.g. use = { default = 'devicons' }
     },
   },
-
   {
     'stevearc/oil.nvim',
     ---@module 'oil'
     ---@type oil.SetupOpts
     opts = {
       default_file_explorer = true,
-      columns = {
-        'icon',
-        -- "permissions",
-        -- "size",
-        -- "mtime",
-      },
+      columns = { 'icon' },
       buf_options = {
         buflisted = false,
         bufhidden = 'hide',
@@ -472,10 +520,10 @@ require('lazy').setup({
       use_default_keymaps = true,
       view_options = {
         show_hidden = false,
-        is_hidden_file = function(name, bufnr)
+        is_hidden_file = function(name, _)
           return name:match '^%.' ~= nil
         end,
-        is_always_hidden = function(name, bufnr)
+        is_always_hidden = function(_, _)
           return false
         end,
         natural_order = 'fast',
@@ -499,7 +547,7 @@ require('lazy').setup({
       preview_win = {
         update_on_cursor_moved = true,
         preview_method = 'fast_scratch',
-        disable_preview = function(filename)
+        disable_preview = function(_)
           return false
         end,
         win_options = {},
@@ -561,52 +609,6 @@ require('lazy').setup({
     },
   },
 })
-
--- Harpoon config
-local harpoon = require 'harpoon'
-harpoon:setup()
-
-vim.keymap.set('n', '<leader>a', function()
-  harpoon:list():add()
-end)
-vim.keymap.set('n', '<leader>x', function()
-  harpoon:list():remove()
-end)
-vim.keymap.set('n', '<C-e>', function()
-  harpoon.ui:toggle_quick_menu(harpoon:list())
-end)
-vim.keymap.set('n', '<leader>j', function()
-  harpoon:list():select(1)
-end)
-vim.keymap.set('n', '<leader>k', function()
-  harpoon:list():select(2)
-end)
-vim.keymap.set('n', '<C-S-P>', function()
-  harpoon:list():prev()
-end)
-vim.keymap.set('n', '<C-S-N>', function()
-  harpoon:list():next()
-end)
-
--- Optional: Harpoon + Telescope
-local conf = require('telescope.config').values
-local function toggle_telescope(harpoon_files)
-  local file_paths = {}
-  for _, item in ipairs(harpoon_files.items) do
-    table.insert(file_paths, item.value)
-  end
-  require('telescope.pickers')
-    .new({}, {
-      prompt_title = 'Harpoon',
-      finder = require('telescope.finders').new_table { results = file_paths },
-      previewer = conf.file_previewer {},
-      sorter = conf.generic_sorter {},
-    })
-    :find()
-end
-vim.keymap.set('n', '<C-e>', function()
-  toggle_telescope(harpoon:list())
-end, { desc = 'Open Harpoon window' })
 
 -- Simple Python runner
 vim.api.nvim_create_user_command('RunPython', function()
