@@ -125,13 +125,21 @@ require('lazy').setup({
       end, { desc = 'Open Harpoon via Telescope' })
 
       -- Example for selecting the first or second pinned file
-      vim.keymap.set('n', '<leader>j', function()
+      vim.keymap.set('n', '<leader>1', function()
         harpoon:list():select(1)
       end, { desc = 'Harpoon select file #1' })
 
-      vim.keymap.set('n', '<leader>k', function()
+      vim.keymap.set('n', '<leader>2', function()
         harpoon:list():select(2)
       end, { desc = 'Harpoon select file #2' })
+
+      vim.keymap.set('n', '<leader>3', function()
+        harpoon:list():select(3)
+      end, { desc = 'Harpoon select file #3' })
+
+      vim.keymap.set('n', '<leader>4', function()
+        harpoon:list():select(4)
+      end, { desc = 'Harpoon select file #4' })
 
       -- Example for jumping to prev/next pinned file
       vim.keymap.set('n', '<C-S-P>', function()
@@ -178,8 +186,10 @@ require('lazy').setup({
         { '<leader>c', group = '[C]ode' },
         { '<leader>d', group = '[D]ocument' },
         { '<leader>h', group = '[H]Left' },
-        { '<leader>j', group = '[1]Harpoon' },
-        { '<leader>k', group = '[2]Harpoon' },
+        { '<leader>1', group = '[1]Harpoon' },
+        { '<leader>2', group = '[2]Harpoon' },
+        { '<leader>3', group = '[3]Harpoon' },
+        { '<leader>4', group = '[4]Harpoon' },
         { '<leader>l', group = '[L]Right' },
         { '<leader>p', group = '[P]ython Run' },
         { '<leader>r', group = '[R]ename' },
