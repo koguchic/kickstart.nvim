@@ -81,6 +81,7 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugins
 require('lazy').setup({
 
+    ---@module "ibl"
   -- HARPOON
   {
     'ThePrimeagen/harpoon',
