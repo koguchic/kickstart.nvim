@@ -80,6 +80,35 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugins
 require('lazy').setup({
   {
+    'sphamba/smear-cursor.nvim',
+    opts = {
+      -- Smear cursor when switching buffers or windows.
+      smear_between_buffers = true,
+
+      -- Smear cursor when moving within line or to neighbor lines.
+      smear_between_neighbor_lines = true,
+
+      -- Draw the smear in buffer space instead of screen space when scrolling
+      scroll_buffer_space = true,
+
+      -- Set to `true` if your font supports legacy computing symbols (block unicode symbols).
+      -- Smears will blend better on all backgrounds.
+      legacy_computing_symbols_support = false,
+
+      -- Optional: Customize the cursor color
+      cursor_color = '#d3cdc3', -- Replace with your desired HEX color
+
+      -- Optional: Additional configurations
+      stiffness = 0.8,
+      trailing_stiffness = 0.5,
+      distance_stop_animating = 0.5,
+      hide_target_hack = false,
+      transparent_bg_fallback_color = '#303030',
+      cterm_cursor_colors = { 240, 245, 250, 255 },
+      cterm_bg = 235,
+    },
+  },
+  {
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
     ---@module "ibl"
