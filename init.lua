@@ -196,18 +196,20 @@ require('lazy').setup({
         { '<leader>a', group = '[A]ppend' },
         { '<leader>c', group = '[C]ode' },
         { '<leader>d', group = '[D]ocument' },
-        { '<leader>h', group = '[H]Left' },
+        { '<leader>h', group = '[H]QF Prev' },
         { '<leader>1', group = '[1]Harpoon' },
         { '<leader>2', group = '[2]Harpoon' },
         { '<leader>3', group = '[3]Harpoon' },
         { '<leader>4', group = '[4]Harpoon' },
-        { '<leader>l', group = '[L]Right' },
+        { '<leader>l', group = '[L]QF Next' },
         { '<leader>o', group = '[O]il Open' },
         { '<leader>p', group = '[P]ython Run' },
         { '<leader>r', group = '[R]ename' },
         { '<leader>s', group = '[S]earch' },
         { '<leader>w', group = '[W]orkspace' },
-        { '<leader>x', group = '[X]Pop' },
+        { '<leader>x', group = 'Pop' },
+        { '<leader>/', group = 'Fuzzy Find' },
+        { '<leader> ', group = 'Buffer List' },
       }
     end,
   },
@@ -675,8 +677,6 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.keymap.set('n', '<leader>gb', ':Gitsigns toggle_current_line_blame<CR>')
 
 -- Quick line navigation
-vim.keymap.set('n', '<leader>h', '^')
-vim.keymap.set('n', '<leader>l', '$')
 vim.keymap.set('n', '<C-k>', '<C-u>')
 vim.keymap.set('n', '<C-j>', '<C-d>')
 vim.keymap.set('v', '<C-k>', '<C-u>')
@@ -689,16 +689,8 @@ vim.keymap.set('n', '<leader>o', function()
 end, { desc = 'Open floating Oil explorer' })
 
 -- Quickfix Navigation
-vim.api.nvim_set_keymap('n', '<leader>qo', ':copen<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>qc', ':cclose<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>qn', ':cnext<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>qp', ':cprev<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>l', ':cnext<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>h', ':cprev<CR>', { noremap = true, silent = true })
 
 -- Telescope Quickfix Picker
-vim.api.nvim_set_keymap('n', '<leader>ft', ':Telescope quickfix<CR>', { noremap = true, silent = true })
-
--- FZF Quickfix Picker
-vim.api.nvim_set_keymap('n', '<leader>fq', ':FZFQuickFix<CR>', { noremap = true, silent = true })
-
--- Modeline for consistency with tab=4
--- vim: ts=4 sts=4 sw=4 et
+vim.api.nvim_set_keymap('n', '<leader>fl', ':Telescope quickfix<CR>', { noremap = true, silent = true })
