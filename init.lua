@@ -191,6 +191,7 @@ require('lazy').setup({
         { '<leader>3', group = '[3]Harpoon' },
         { '<leader>4', group = '[4]Harpoon' },
         { '<leader>l', group = '[L]Right' },
+        { '<leader>o', group = '[O]il Open' },
         { '<leader>p', group = '[P]ython Run' },
         { '<leader>r', group = '[R]ename' },
         { '<leader>s', group = '[S]earch' },
@@ -676,6 +677,10 @@ vim.keymap.set('v', '<C-k>', '<C-u>')
 vim.keymap.set('v', '<C-j>', '<C-d>')
 vim.keymap.set('n', '<C-h>', '^')
 vim.keymap.set('n', '<C-l>', '$')
+
+vim.keymap.set('n', '<leader>o', function()
+  require('oil').open_float()
+end, { desc = 'Open floating Oil explorer' })
 
 -- Modeline for consistency with tab=4
 -- vim: ts=4 sts=4 sw=4 et
