@@ -238,12 +238,12 @@ require('lazy').setup({
         { '<leader>a', group = '[A]ppend' },
         { '<leader>c', group = '[C]ode' },
         { '<leader>d', group = '[D]ocument' },
-        { '<leader>h', group = '[H]QF Prev' },
         { '<leader>1', group = '[1]Harpoon' },
         { '<leader>2', group = '[2]Harpoon' },
         { '<leader>3', group = '[3]Harpoon' },
         { '<leader>4', group = '[4]Harpoon' },
-        { '<leader>l', group = '[L]QF Next' },
+        { '<leader>j', group = '[J]QF Prev' },
+        { '<leader>k', group = '[K]QF Next' },
         { '<leader>o', group = '[O]il Open' },
         { '<leader>p', group = '[P]ython Run' },
         { '<leader>r', group = '[R]ename' },
@@ -732,8 +732,8 @@ vim.keymap.set('n', '<leader>o', function()
 end, { desc = 'Open floating Oil explorer' })
 
 -- Quickfix Navigation
-vim.api.nvim_set_keymap('n', '<leader>l', ':cnext<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>h', ':cprev<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>k', '<cmd>cnext<CR>zz')
+vim.keymap.set('n', '<leader>j', '<cmd>cprev<CR>zz')
 
 -- Telescope Quickfix Picker
 vim.api.nvim_set_keymap('n', '<leader>fl', ':Telescope quickfix<CR>', { noremap = true, silent = true })
