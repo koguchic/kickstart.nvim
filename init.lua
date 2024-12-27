@@ -19,6 +19,9 @@ vim.g.maplocalleader = ' '
 -- For multi-key mappings
 vim.opt.timeoutlen = 200
 
+-- Disable Q originally goes to Ex mode
+vim.keymap.set('n', 'Q', '<nop>')
+
 -- ripgrep
 vim.opt.grepprg = 'rg --vimgrep --no-heading'
 vim.opt.grepformat = '%f:%l:%c:%m'
