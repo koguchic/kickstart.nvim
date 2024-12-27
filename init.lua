@@ -86,7 +86,7 @@ require('lazy').setup({
       -- Optional: Configure undotree settings here
       vim.g.undotree_SetFocusWhenToggle = 1 -- Automatically focus the undotree window when toggled
       vim.g.undotree_ShortIndicators = 1 -- Use shorter indicators for branches
-      vim.g.undotree_WindowLayout = 1 -- Layout: right vs left vs bottom
+      vim.g.undotree_WindowLayout = 2 -- Layout: right vs left vs bottom
       vim.g.undotree_SplitWidth = 30
     end,
   },
@@ -741,9 +741,6 @@ vim.opt.undodir = vim.fn.stdpath 'cache' .. '/undo'
 
 -- Ensure the undo directory exists
 vim.fn.mkdir(vim.fn.stdpath 'cache' .. '/undo', 'p')
-
--- Optionally, enable focusing the Undo Tree window when toggled
-vim.g.undotree_SetFocusWhenToggle = 1
 
 vim.cmd [[
   highlight UndotreeCurrentLine guibg=#3c3836 guifg=#fb4934
