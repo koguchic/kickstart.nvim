@@ -7,6 +7,11 @@ vim.opt.smarttab = true
 -- No swap files
 vim.opt.swapfile = false
 
+-- Move Selected Text Up/Down in Visual Mode
+-- Pressing J/K moved the highlighted block
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+
 -- Leader keys
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
