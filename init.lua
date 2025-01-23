@@ -756,3 +756,23 @@ vim.cmd [[
   highlight UndotreeDiffChange guifg=#fabd2f
   highlight UndotreeDiffDelete guifg=#cc241d
 ]]
+
+--------------------------------------------------------------------------------
+-- TOGGLE RELATIVE NUMBER + SMEAR CURSOR
+--------------------------------------------------------------------------------
+local smear_enabled = true
+
+local function toggle_rel_number_and_smear_cursor()
+  if smear_enabled then
+    -- Turn both off
+    vim.opt.relativenumber = false
+    require('smear-cursor').disable()
+  else
+    -- Turn both on
+    vim.opt.relativenumber = true
+    require('smear-cursor').enable()
+  end
+  smear_enabled = not smear_enabled
+end
+
+vim.keymap.set('n', '<leader>ts', toggle_rel_number_and_smear_cursor, { desc = 'Toggle relative numbers & Smear Cursor' })
