@@ -683,8 +683,8 @@ vim.keymap.set('n', '<leader>o', function()
 end, { desc = 'Open floating Oil explorer' })
 
 -- Quickfix Navigation
-vim.keymap.set('n', '<leader>k', '<cmd>cnext<CR>zz')
-vim.keymap.set('n', '<leader>j', '<cmd>cprev<CR>zz')
+vim.keymap.set('n', '<leader>j', '<cmd>cnext<CR>zz')
+vim.keymap.set('n', '<leader>k', '<cmd>cprev<CR>zz')
 
 -- Telescope Quickfix Picker
 vim.api.nvim_set_keymap('n', '<leader>fl', ':Telescope quickfix<CR>', { noremap = true, silent = true })
