@@ -64,7 +64,9 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>')
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>')
 
 -- Yank filename to clipboard
-vim.api.nvim_set_keymap('n', '<leader>yf', [[:lua vim.fn.setreg('+', vim.fn.expand('%:p'))<CR>]], { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>yf', function()
+  vim.fn.setreg('+', vim.fn.expand '%:p')
+end, { desc = 'Yank file path' })
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd('TextYankPost', {
