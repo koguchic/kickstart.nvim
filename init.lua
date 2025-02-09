@@ -102,35 +102,6 @@ require('lazy').setup({
     end,
   },
   {
-    'sphamba/smear-cursor.nvim',
-    opts = {
-      -- Smear cursor when switching buffers or windows.
-      smear_between_buffers = true,
-
-      -- Smear cursor when moving within line or to neighbor lines.
-      smear_between_neighbor_lines = true,
-
-      -- Draw the smear in buffer space instead of screen space when scrolling
-      scroll_buffer_space = true,
-
-      -- Set to `true` if your font supports legacy computing symbols (block unicode symbols).
-      -- Smears will blend better on all backgrounds.
-      legacy_computing_symbols_support = false,
-
-      -- Optional: Customize the cursor color
-      cursor_color = '#d3cdc3', -- Replace with your desired HEX color
-
-      -- Optional: Additional configurations
-      stiffness = 0.8,
-      trailing_stiffness = 0.5,
-      distance_stop_animating = 0.5,
-      hide_target_hack = false,
-      transparent_bg_fallback_color = '#303030',
-      cterm_cursor_colors = { 240, 245, 250, 255 },
-      cterm_bg = 235,
-    },
-  },
-  {
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
     ---@module "ibl"
@@ -254,6 +225,7 @@ require('lazy').setup({
         { '<leader>u', group = '[U]ndoTree' },
         { '<leader>w', group = '[W]orkspace' },
         { '<leader>x', group = 'Pop' },
+        { '<leader>yf', group = '[Y]ank [File]' },
         { '<leader>/', group = 'Fuzzy Find' },
         { '<leader> ', group = 'Buffer List' },
       }
@@ -761,21 +733,23 @@ vim.cmd [[
 ]]
 
 --------------------------------------------------------------------------------
--- TOGGLE RELATIVE NUMBER + SMEAR CURSOR
+-- TOGGLE RELATIVE NUMBERS
 --------------------------------------------------------------------------------
-local smear_enabled = true
 
-local function toggle_rel_number_and_smear_cursor()
-  if smear_enabled then
-    -- Turn both off
-    vim.opt.relativenumber = false
-    require('smear-cursor').disable()
-  else
-    -- Turn both on
-    vim.opt.relativenumber = true
-    require('smear-cursor').enable()
-  end
-  smear_enabled = not smear_enabled
+local function toggle_relative_numbers()
+  vim.opt.relativenumber = not vim.opt.relativenumber:get()
 end
 
-vim.keymap.set('n', '<leader>ts', toggle_rel_number_and_smear_cursor, { desc = 'Toggle relative numbers & Smear Cursor' })
+-- Key mapping for toggling relative numbers only
+vim.keymap.set('n', '<leader>tr', toggle_relative_numbers, { desc = 'Toggle Relative Numbers' })
+
+-- Which-key registration for the toggle group
+local wk_status, wk = pcall(require, 'which-key')
+if wk_status then
+  wk.register({
+    t = {
+      name = 'Toggle', -- Group name under <leader>t
+      r = 'Toggle Relative Numbers',
+    },
+  }, { prefix = '<leader>' })
+end
