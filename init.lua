@@ -708,10 +708,7 @@ vim.cmd [[
   highlight UndotreeDiffDelete guifg=#cc241d
 ]]
 
---------------------------------------------------------------------------------
--- TOGGLE RELATIVE NUMBERS
---------------------------------------------------------------------------------
-
+-- Toggle Relative Numbers
 local function toggle_relative_numbers()
   vim.opt.relativenumber = not vim.opt.relativenumber:get()
 end
