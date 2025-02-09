@@ -8,7 +8,7 @@ vim.opt.smarttab = true
 vim.opt.swapfile = false
 
 -- Move Selected Text Up/Down in Visual Mode
--- Pressing J/K moved the highlighted block
+-- Pressing J/K moves the highlighted block
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
@@ -113,7 +113,6 @@ require('lazy').setup({
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',
     dependencies = { 'nvim-lua/plenary.nvim' },
-
     config = function()
       local harpoon = require 'harpoon'
 
@@ -202,34 +201,6 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
     },
-  },
-  {
-    'folke/which-key.nvim',
-    event = 'VimEnter',
-    config = function()
-      local wk = require 'which-key'
-      wk.add {
-        { '<leader>a', group = '[A]ppend' },
-        { '<leader>c', group = '[C]ode' },
-        { '<leader>d', group = '[D]ocument' },
-        { '<leader>1', group = '[1]Harpoon' },
-        { '<leader>2', group = '[2]Harpoon' },
-        { '<leader>3', group = '[3]Harpoon' },
-        { '<leader>4', group = '[4]Harpoon' },
-        { '<leader>j', group = '[J]QF Prev' },
-        { '<leader>k', group = '[K]QF Next' },
-        { '<leader>o', group = '[O]il Open' },
-        { '<leader>p', group = '[P]ython Run' },
-        { '<leader>r', group = '[R]ename' },
-        { '<leader>s', group = '[S]earch' },
-        { '<leader>u', group = '[U]ndoTree' },
-        { '<leader>w', group = '[W]orkspace' },
-        { '<leader>x', group = 'Pop' },
-        { '<leader>yf', group = '[Y]ank [File]' },
-        { '<leader>/', group = 'Fuzzy Find' },
-        { '<leader> ', group = 'Buffer List' },
-      }
-    end,
   },
 
   -- Fuzzy Finder (Telescope)
@@ -385,6 +356,11 @@ require('lazy').setup({
     opts = {
       notify_on_error = false,
       format_on_save = {
+        -- The enabled function checks a buffer-local variable.
+        enabled = function()
+          -- If vim.b.disable_formatting is true, then disable formatting.
+          return not vim.b.disable_formatting
+        end,
         timeout_ms = 500,
         lsp_fallback = true,
       },
@@ -717,7 +693,7 @@ vim.cmd.colorscheme 'catppuccin-frappe'
 
 -- Keybindings for undotree.nvim
 vim.api.nvim_set_keymap('n', '<leader>u', ':UndotreeToggle<CR>', { noremap = true, silent = true })
---
+
 -- Enable persistent undo
 vim.opt.undofile = true
 vim.opt.undodir = vim.fn.stdpath 'cache' .. '/undo'
@@ -742,14 +718,3 @@ end
 
 -- Key mapping for toggling relative numbers only
 vim.keymap.set('n', '<leader>tr', toggle_relative_numbers, { desc = 'Toggle Relative Numbers' })
-
--- Which-key registration for the toggle group
-local wk_status, wk = pcall(require, 'which-key')
-if wk_status then
-  wk.register({
-    t = {
-      name = 'Toggle', -- Group name under <leader>t
-      r = 'Toggle Relative Numbers',
-    },
-  }, { prefix = '<leader>' })
-end
