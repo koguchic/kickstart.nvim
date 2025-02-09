@@ -697,7 +697,6 @@ vim.cmd.colorscheme 'catppuccin-frappe'
 vim.api.nvim_set_keymap('n', '<leader>u', ':UndotreeToggle<CR>', { noremap = true, silent = true })
 
 -- Enable persistent undo
-vim.opt.undofile = true
 vim.opt.undodir = vim.fn.stdpath 'cache' .. '/undo'
 
 -- Ensure the undo directory exists
