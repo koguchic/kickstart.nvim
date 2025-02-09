@@ -562,43 +562,6 @@ end, {})
 require 'run_python_file'
 vim.api.nvim_set_keymap('n', '<leader>p', ':RunPython<CR>', { noremap = true, silent = true })
 
--- Simple C++ runner
-vim.api.nvim_create_user_command('RunCpp', function()
-  require('run_cpp_file').run_cpp_file()
-end, {})
-require 'run_cpp_file'
-vim.api.nvim_set_keymap('n', '<leader>cp', ':RunCpp<CR>', { noremap = true, silent = true })
-
--- Clangd config (for 4 spaces, etc.)
-require('lspconfig').clangd.setup {
-  cmd = {
-    'clangd',
-    '--query-driver=/opt/homebrew/Cellar/gcc/14.2.0_1/bin/*',
-    '--fallback-style=none',
-  },
-  on_attach = function(client, bufnr)
-    client.server_capabilities.documentFormattingProvider = true
-    client.server_capabilities.documentRangeFormattingProvider = true
-    vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { buffer = bufnr })
-  end,
-}
-
--- Format on save for C++
-vim.api.nvim_create_autocmd('BufWritePre', {
-  pattern = '*.cpp',
-  callback = function()
-    vim.lsp.buf.format()
-  end,
-})
-
--- Disable diagnostics for C++ by default
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'cpp',
-  callback = function()
-    vim.diagnostic.enable(false)
-  end,
-})
-
 -- Git blame on current line
 vim.keymap.set('n', '<leader>gb', ':Gitsigns toggle_current_line_blame<CR>')
 
