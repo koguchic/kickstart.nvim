@@ -162,6 +162,7 @@ require('lazy').setup({
           },
         },
         defaults = {
+          path_display = { 'smart' },
           mappings = {
             i = { ['<C-d>'] = require('telescope.actions').delete_buffer },
             n = { ['<C-d>'] = require('telescope.actions').delete_buffer },
@@ -454,7 +455,7 @@ require('lazy').setup({
         ['<C-c>'] = { 'actions.close', mode = 'n' },
         ['<C-l>'] = 'actions.refresh',
         ['-'] = { 'actions.parent', mode = 'n' },
-        ['_'] = { 'actions.open_cwd', mode = 'n' },
+        ['<leader>o'] = { 'actions.open_cwd', mode = 'n' },
         ['`'] = { 'actions.cd', mode = 'n' },
         ['~'] = { 'actions.cd', opts = { scope = 'tab' }, mode = 'n' },
         ['gs'] = { 'actions.change_sort', mode = 'n' },
