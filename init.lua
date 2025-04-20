@@ -262,6 +262,28 @@ require('lazy').setup({
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`.
   --
+  {
+    'github/copilot.vim',
+    event = 'InsertEnter', -- load on first insertion
+    config = function()
+      vim.g.copilot_no_tab_map = true -- disable default <Tab> mapping
+      vim.cmd 'Copilot setup' -- run setup one time
+      vim.api.nvim_set_keymap(
+        'i',
+        '<Tab>', -- accept suggestion with Tab
+        'copilot#Accept("<Tab>")',
+        { expr = true, silent = true }
+      )
+    end,
+  },
+  {
+    'olimorris/codecompanion.nvim',
+    opts = {},
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+    },
+  },
   -- See `:help gitsigns` to understand what the configuration keys do
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
