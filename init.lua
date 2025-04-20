@@ -20,7 +20,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 
 -- ripgrep
-vim.opt.ripgrep = 'rg --vimgrep --no-heading'
+vim.opt.grepprg = 'rg --vimgrep --no-heading'
 vim.opt.grepformat = '%f:%l:%c:%m'
 
 -- Enable mouse mode, can be useful for resizing splits for example!
