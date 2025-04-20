@@ -831,7 +831,7 @@ require('lazy').setup({
 })
 
 -- Send the visual selection as context
-vim.keymap.set('x', '<leader>cc', ":'<,'>CodeCompanion<CR>", {
+vim.keymap.set('x', '<leader>cc', ":'<,'>CodeCompanion", {
   noremap = true,
   silent = false, -- show the cmdline so you can type your prompt
   desc = 'CodeCompanion: use visual selection',
