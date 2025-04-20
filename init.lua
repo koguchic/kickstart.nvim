@@ -12,6 +12,9 @@ vim.g.have_nerd_font = false
 
 vim.opt.swapfile = false
 
+-- Remap <C-r> (redo) to U
+vim.keymap.set('n', 'U', '<C-r>', { desc = 'Redo' })
+
 -- Disable Q originally goes to Ex mode
 vim.keymap.set('n', 'Q', '<nop>')
 
