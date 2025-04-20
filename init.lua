@@ -827,5 +827,26 @@ require('lazy').setup({
   },
 })
 
+-- Send the visual selection as context
+vim.keymap.set('x', '<leader>cc', ":'<,'>CodeCompanion<CR>", {
+  noremap = true,
+  silent = false, -- show the cmdline so you can type your prompt
+  desc = 'CodeCompanion: use visual selection',
+})
+
+-- Open CodeCompanion chat
+vim.keymap.set('n', '<leader>cc', '<Cmd>CodeCompanionChat<CR>', {
+  noremap = true,
+  silent = true,
+  desc = 'CodeCompanion: open chat',
+})
+
+-- Toggle the CodeCompanion chat pane
+vim.keymap.set('n', '<leader>ct', '<Cmd>CodeCompanionChat Toggle<CR>', {
+  noremap = true,
+  silent = true, -- no need to echo anything
+  desc = 'CodeCompanion: toggle chat',
+})
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
